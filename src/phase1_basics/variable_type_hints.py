@@ -94,6 +94,10 @@ def process_user_data(raw_data: List[Dict[str, str]]) -> List[User]:
 # 4. 複雑な型の場合の型ヒント
 # =============================================================================
 
+# ✅ 型エイリアスで可読性向上
+UserData = Dict[str, Union[str, int]]
+UsersGroup = Dict[str, List[UserData]]
+
 def complex_data_processing():
     """複雑な型の場合は型ヒントが有用"""
     
@@ -104,10 +108,6 @@ def complex_data_processing():
             {"name": "Bob", "age": 30}
         ]
     }
-    
-    # ✅ 型エイリアスで可読性向上
-    UserData = Dict[str, Union[str, int]]
-    UsersGroup = Dict[str, List[UserData]]
     
     nested_data_v2: UsersGroup = {
         "users": [
