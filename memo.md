@@ -26,6 +26,46 @@ pip install -r requirements.txt
 
 ---
 
+# VS Code設定（Python開発効率化）
+
+## 必要な拡張機能
+- **Python Extension Pack** (Microsoft公式)
+  - Python
+  - Pylance
+  - Python Debugger
+
+## settings.json設定
+```json
+{
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.completeFunctionParens": true,
+    "editor.inlayHints.enabled": "on",
+    "python.analysis.inlayHints.functionReturnTypes": true,
+    "python.analysis.inlayHints.variableTypes": true,
+    "python.analysis.inlayHints.callArgumentNames": true,
+    "editor.formatOnSave": true,
+    "python.formatting.provider": "black"
+}
+```
+
+## 便利なショートカット
+| 機能 | ショートカット | 説明 |
+|------|---------------|------|
+| **定義へジャンプ** | `F12` | 関数・クラスの定義に移動 |
+| **定義をピーク** | `Alt + F12` | 定義をポップアップで表示 |
+| **参照を表示** | `Shift + F12` | 使用箇所をすべて表示 |
+| **型情報表示** | `Ctrl + K, Ctrl + I` | 詳細な型情報を表示 |
+| **パラメータヒント** | `Ctrl + Shift + Space` | 関数の引数情報を表示 |
+| **IntelliSense** | `Ctrl + Space` | 補完候補を表示 |
+| **ホバー情報** | マウスオーバー | 型情報・引数情報を表示 |
+
+## トラブルシューティング
+- Pythonインタープリター選択: `Ctrl + Shift + P` → "Python: Select Interpreter"
+- 言語サーバー再起動: `Ctrl + Shift + P` → "Python: Restart Language Server"
+
+---
+
 # Python学習プラン
 
 ## 前提スキル
