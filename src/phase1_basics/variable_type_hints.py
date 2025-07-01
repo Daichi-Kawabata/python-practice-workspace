@@ -21,7 +21,7 @@ age = 25                   # 型推論でint
 is_active = True           # 型推論でbool
 
 # ✅ 型ヒントが有用な場面
-users: List[str] = []                    # 空リストは型推論できない
+user_names: List[str] = []               # 空リストは型推論できない
 scores: Dict[str, int] = {}              # 空辞書は型推論できない
 current_user: Optional[str] = None       # Noneは型推論できない
 # data: Union[str, int] = get_data()     # 複雑な型（例なのでコメントアウト）
