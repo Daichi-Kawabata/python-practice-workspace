@@ -11,4 +11,3 @@ class Task:
     description: str
     created_at: date
     completed_at: date | None
-    pass
