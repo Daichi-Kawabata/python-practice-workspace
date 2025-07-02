@@ -75,45 +75,6 @@ def create_parser() -> argparse.ArgumentParser:
     return parser
 ```
 
-### 課題2: 設定管理ライブラリ
-
-#### 階層アクセスのヒント
-```python
-class DotDict:
-    """ドット記法でアクセス可能な辞書"""
-    def __init__(self, data: dict):
-        self._data = data
-    
-    def __getattr__(self, key: str):
-        try:
-            value = self._data[key]
-            if isinstance(value, dict):
-                return DotDict(value)  # 再帰的にDotDict化
-            return value
-        except KeyError:
-            raise AttributeError(f"'{type(self).__name__}' has no attribute '{key}'")
-```
-
-#### プロトコルベースの設計ヒント
-```python
-from typing import Protocol, Any
-
-class ConfigLoader(Protocol):
-    def load(self, file_path: str) -> dict:
-        """設定ファイルを読み込んで辞書を返す"""
-        ...
-
-class JsonConfigLoader:
-    def load(self, file_path: str) -> dict:
-        # JSON読み込み実装
-        pass
-
-class YamlConfigLoader:
-    def load(self, file_path: str) -> dict:
-        # YAML読み込み実装
-        pass
-```
-
 ### 課題3: コード移植
 
 #### Ruby → Python API クライアント
@@ -148,37 +109,6 @@ class ApiClient:
         except ApiError as e:
             print(f"Error: {e.message}")
             return []
-```
-
-#### Go → Python ファイルプロセッサ
-```python
-from pathlib import Path
-from typing import List
-
-class FileProcessorError(Exception):
-    pass
-
-class FileProcessor:
-    def __init__(self, file_path: str):
-        self.file_path = Path(file_path)
-    
-    def count_lines(self) -> int:
-        try:
-            with open(self.file_path, 'r', encoding='utf-8') as file:
-                return sum(1 for _ in file)
-        except (FileNotFoundError, PermissionError) as e:
-            raise FileProcessorError(f"Cannot read file: {e}")
-    
-    def find_word(self, word: str) -> List[int]:
-        try:
-            line_numbers = []
-            with open(self.file_path, 'r', encoding='utf-8') as file:
-                for line_num, line in enumerate(file, 1):
-                    if word in line:
-                        line_numbers.append(line_num)
-            return line_numbers
-        except (FileNotFoundError, PermissionError) as e:
-            raise FileProcessorError(f"Cannot read file: {e}")
 ```
 
 ## 実装時のチェックポイント
