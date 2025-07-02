@@ -1,0 +1,42 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "田中太郎",
+      "email": "tanaka@example.com",
+      "profile": {
+        "age": 28,
+        "city": "東京",
+        "hobbies": ["読書", "映画鑑賞", "プログラミング"]
+      },
+      "active": true
+    },
+    {
+      "id": 2,
+      "name": "佐藤花子",
+      "email": "sato@example.com",
+      "profile": {
+        "age": 32,
+        "city": "大阪",
+        "hobbies": ["料理", "旅行"]
+      },
+      "active": true
+    },
+    {
+      "id": 3,
+      "name": "鈴木一郎",
+      "email": "suzuki@example.com",
+      "profile": {
+        "age": 25,
+        "city": "名古屋",
+        "hobbies": ["スポーツ", "音楽"]
+      },
+      "active": false
+    }
+  ],
+  "metadata": {
+    "total_count": 3,
+    "created_at": "2025-07-02T10:00:00Z",
+    "version": "1.0"
+  }
+}
