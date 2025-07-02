@@ -104,7 +104,7 @@ pip install -r requirements.txt
   - [x] モジュール検索パス、__name__/__file__属性
 
 ### 演習課題
-- [ ] 既存の小規模Ruby/GolangコードをPythonへ書き換える
+- [x] 既存の小規模Ruby/GolangコードをPythonへ書き換える
 - [ ] 標準ライブラリを用いた簡単なCLIツールの作成
 
 ## フェーズ2: Pythonでのデータ操作、外部ライブラリ基礎
