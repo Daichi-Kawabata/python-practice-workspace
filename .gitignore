@@ -53,3 +53,6 @@ htmlcov/
 .mypy_cache/
 .dmypy.json
 dmypy.json
+
+# custom
+src/phase1_basics/exercises/task_manager/tasks.json
