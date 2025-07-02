@@ -105,7 +105,7 @@ pip install -r requirements.txt
 
 ### 演習課題
 - [x] 既存の小規模Ruby/GolangコードをPythonへ書き換える
-- [ ] 標準ライブラリを用いた簡単なCLIツールの作成
+- [x] 標準ライブラリを用いた簡単なCLIツールの作成
 
 ## フェーズ2: Pythonでのデータ操作、外部ライブラリ基礎
 
