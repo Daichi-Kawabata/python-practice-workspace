@@ -1,0 +1,4 @@
+name,current_price,previous_price,change,change_percent,url,timestamp
+ノートPC,101802,98000,3802,3.88,https://example.com/laptop,2024-01-15 10:00:00
+スマートフォン,88002,85000,3002,3.53,https://example.com/phone,2024-01-15 10:00:00
+タブレット,67683,65000,2683,4.13,https://example.com/tablet,2024-01-15 10:00:00

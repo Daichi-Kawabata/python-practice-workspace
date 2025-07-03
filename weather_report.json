@@ -1,0 +1,46 @@
+{
+  "date": "2024-01-15",
+  "cities": [
+    {
+      "city": "Tokyo",
+      "temperature": 22,
+      "humidity": 65,
+      "description": "曇り"
+    },
+    {
+      "city": "Osaka",
+      "temperature": 25,
+      "humidity": 70,
+      "description": "晴れ"
+    },
+    {
+      "city": "Kyoto",
+      "temperature": 20,
+      "humidity": 60,
+      "description": "小雨"
+    },
+    {
+      "city": "Hiroshima",
+      "temperature": 24,
+      "humidity": 68,
+      "description": "晴れ"
+    },
+    {
+      "city": "Sapporo",
+      "temperature": 15,
+      "humidity": 55,
+      "description": "曇り"
+    }
+  ],
+  "statistics": {
+    "average_temperature": 21.2,
+    "hottest_city": {
+      "name": "Osaka",
+      "temperature": 25
+    },
+    "coldest_city": {
+      "name": "Sapporo",
+      "temperature": 15
+    }
+  }
+}
