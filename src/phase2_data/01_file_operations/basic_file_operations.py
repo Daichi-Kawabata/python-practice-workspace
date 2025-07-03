@@ -6,8 +6,6 @@
 
 from pathlib import Path
 from typing import List, Optional
-import os
-
 
 def basic_text_file_operations():
     """基本的なテキストファイルの読み書き"""
