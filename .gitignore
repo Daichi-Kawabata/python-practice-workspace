@@ -54,5 +54,50 @@ htmlcov/
 .dmypy.json
 dmypy.json
 
+# データ分析・学習過程で生成されるファイル
+# CSV データファイル
+*.csv
+sample_*.csv
+*_data.csv
+sales_*.csv
+users_*.csv
+students_*.csv
+employee_*.csv
+product_*.csv
+
+# 画像ファイル
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+data_visualization.*
+chart_*.png
+graph_*.png
+
+# HTML レポート
+*.html
+report_*.html
+analysis_*.html
+
+# JSON データファイル
+*_report.json
+integrated_*.json
+weather_*.json
+analysis_*.json
+
+# Excel ファイル
+*.xlsx
+*.xls
+
+# スクレイピング結果
+quotes_*.csv
+price_*.csv
+scraped_*.csv
+scraped_*.json
+
+# Jupyter Notebook出力
+*.ipynb_checkpoints
+
 # custom
 src/phase1_basics/exercises/task_manager/tasks.json

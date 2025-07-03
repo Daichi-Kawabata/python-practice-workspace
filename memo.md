@@ -110,9 +110,9 @@ pip install -r requirements.txt
 ## フェーズ2: Pythonでのデータ操作、外部ライブラリ基礎
 
 ### 学習項目
-- [ ] ファイル・CSV/JSON操作
-- [ ] Requests、BeautifulSoupでのWebスクレイピング簡単実践
-- [ ] pandasで簡単なデータ操作・分析
+- [x] ファイル・CSV/JSON操作
+- [x] Requests、BeautifulSoupでのWebスクレイピング簡単実践
+- [x] pandasで簡単なデータ操作・分析
 
 ### 演習課題
 - [ ] APIからJSONを取得し、CSVやExcel形式で出力するツール作成
