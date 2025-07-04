@@ -9,7 +9,6 @@ from typing import Dict, Any
 # API エンドポイント設定
 API_ENDPOINTS: Dict[str, str] = {
     'jsonplaceholder': 'https://jsonplaceholder.typicode.com/posts',
-    'countries': 'https://restcountries.com/v3.1/all',
     'catfacts': 'https://catfact.ninja/facts',
     'randomuser': 'https://randomuser.me/api/?results=50',
     'github': 'https://api.github.com/users/octocat/repos'
@@ -22,12 +21,6 @@ DATA_MAPPING: Dict[str, Dict[str, str]] = {
         'title': 'title',
         'content': 'body',
         'user_id': 'userId'
-    },
-    'countries': {
-        'name': 'name.common',
-        'capital': 'capital.0',
-        'population': 'population',
-        'region': 'region'
     },
     'catfacts': {
         'fact': 'fact',
