@@ -115,7 +115,7 @@ pip install -r requirements.txt
 - [x] pandasで簡単なデータ操作・分析
 
 ### 演習課題
-- [ ] APIからJSONを取得し、CSVやExcel形式で出力するツール作成
+- [x] APIからJSONを取得し、CSVやExcel形式で出力するツール作成
 - [ ] pandasを用いたデータ集計、グラフ描画（簡易分析）
 
 ## フェーズ3: ORMapper学習 (SQLAlchemy中心)
