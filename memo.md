@@ -121,14 +121,23 @@ pip install -r requirements.txt
 ## フェーズ3: ORMapper学習 (SQLAlchemy中心)
 
 ### 学習項目
-- [ ] SQLAlchemyの基本概念（モデル作成、CRUD操作）
-- [ ] DBマイグレーションツール（Alembic）利用法
-- [ ] リレーションの定義（1対多、多対多の実践）
-- [ ] クエリ構築、トランザクション管理
+- [x] SQLAlchemyの基本概念（モデル作成、CRUD操作）
+- [x] DBマイグレーションツール（Alembic）利用法
+- [x] リレーションの定義（1対多、多対多の実践）
+- [x] クエリ構築、トランザクション管理
 
 ### 演習課題
 - [ ] ブログモデルの設計・CRUDのCLIアプリ作成
 - [ ] RubyのActiveRecordやGolangのGORMとの比較メモを作成
+
+### 学習状況（2025-07-04時点）
+- [x] 相対インポートエラーの解決完了（models.py, crud_operations.py, blog_cli.py）
+- [x] database.pyのテスト実行成功（データベース初期化・セッション作成）
+- [x] models.pyのテスト実行成功（テーブル作成・テストデータ挿入）
+- [x] 学習用教材の整理完了（演習課題を適切に分離）
+- [x] 演習課題用の骨格ファイル作成完了（exercises/crud_operations.py, exercises/blog_cli.py）
+- [x] 参考実装の保存完了（exercises/*_template.py）
+- [ ] 演習課題の実装・練習（学習者が実施）
 
 ## フェーズ4〜5: Webフレームワーク基礎・実践（FastAPI & Flask中心）
 
