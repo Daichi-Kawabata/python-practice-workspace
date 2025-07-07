@@ -54,6 +54,16 @@ class User(Base):
         nullable=False
     )
     
+    # 実習2: 追加カラム（Alembicマイグレーション実習用）
+    # プロフィール画像URL
+    profile_image: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
+    
+    # 最後のログイン日時
+    last_login: Mapped[Optional[datetime]] = mapped_column(DateTime, nullable=True)
+    
+    # ユーザーの説明文
+    bio: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    
     # リレーション: 1人のユーザーは複数の記事を持つ
     posts = relationship(
         "Post", 
@@ -156,6 +166,13 @@ class Post(Base):
         back_populates="posts"
     )
     
+    # リレーション: 記事のコメント
+    comments = relationship(
+        "Comment",
+        back_populates="post",
+        cascade="all, delete-orphan"  # 記事削除時に関連コメントも削除
+    )
+    
     # インデックス: 複合インデックスの例
     __table_args__ = (
         Index('idx_author_published', 'author_id', 'is_published'),
@@ -197,6 +214,43 @@ class Tag(Base):
     
     def __str__(self) -> str:
         return str(self.name)
+
+class Comment(Base):
+    """コメントモデル - Alembicマイグレーション実習用
+    
+    記事に対するコメントを管理するモデル
+    """
+    __tablename__ = "comments"
+    
+    # 主キー
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    
+    # コメント内容
+    content: Mapped[str] = mapped_column(Text, nullable=False)
+    
+    # 投稿者名
+    author_name: Mapped[str] = mapped_column(String(100), nullable=False)
+    
+    # 投稿者メールアドレス
+    author_email: Mapped[str] = mapped_column(String(100), nullable=False)
+    
+    # 承認フラグ
+    is_approved: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
+    
+    # 作成日時
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, nullable=False)
+    
+    # 外部キー: 記事への参照
+    post_id: Mapped[int] = mapped_column(ForeignKey("posts.id"), nullable=False)
+    
+    # リレーション
+    post = relationship("Post", back_populates="comments")
+    
+    def __repr__(self) -> str:
+        return f"<Comment(id={self.id}, author='{self.author_name}', approved={self.is_approved})>"
+    
+    def __str__(self) -> str:
+        return f"Comment by {self.author_name}"
 
 # 多対多の関係のための中間テーブル
 from sqlalchemy import Table
@@ -251,8 +305,25 @@ if __name__ == "__main__":
                 tags=[tag1, tag2]
             )
             
+            # コメント作成
+            comment1 = Comment(
+                content="素晴らしい記事ですね！",
+                author_name="山田太郎",
+                author_email="taro.yamada@example.com",
+                is_approved=True,
+                post=post  # 記事に関連付け
+            )
+            
+            comment2 = Comment(
+                content="もっと詳しく知りたいです。",
+                author_name="鈴木花子",
+                author_email="hanako.suzuki@example.com",
+                is_approved=False,
+                post=post  # 記事に関連付け
+            )
+            
             # セッションに追加
-            session.add_all([user, category, tag1, tag2, post])
+            session.add_all([user, category, tag1, tag2, post, comment1, comment2])
             session.commit()
             
             print("✅ テストデータ作成完了")
@@ -267,6 +338,14 @@ if __name__ == "__main__":
                 print(f"タグ: {tag_names}")
             else:
                 print("タグ: なし")
+            
+            # コメントの確認（型アサーション使用）
+            post_comments = cast(List[Comment], post.comments)
+            if post_comments:
+                for comment in post_comments:
+                    print(f"コメント: {comment.content} (投稿者: {comment.author_name}, 承認済み: {comment.is_approved})")
+            else:
+                print("コメント: なし")
             
     except Exception as e:
         print(f"❌ エラー: {e}")
