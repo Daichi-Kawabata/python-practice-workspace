@@ -144,7 +144,7 @@ pip install -r requirements.txt
 
 ### 演習課題
 
-- [x] ブログモデルの設計・CRUD の CLI アプリ作成
+- [x] ブログモデルの設計・CRUD の CLI アプリ作成 →CLI の作成は時間がかかるため BLOG モデルの操作ができるレベルまで学習済み
 - [x] Ruby の ActiveRecord や Golang の GORM との比較メモを作成
 
 ### 学習状況（2025-07-04 時点）
