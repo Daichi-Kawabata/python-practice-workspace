@@ -1,25 +1,25 @@
-# Alembicマイグレーション実習ガイド
+# Alembic マイグレーション実習ガイド
 
-このガイドでは、Alembicを使用したデータベーススキーマの変更管理を実践的に学習します。
+このガイドでは、Alembic を使用したデータベーススキーマの変更管理を実践的に学習します。
 
 ## 🎯 学習目標
 
-- [ ] Alembicの基本概念を理解する
+- [ ] Alembic の基本概念を理解する
 - [ ] マイグレーションファイルの作成方法を学ぶ
 - [ ] データベーススキーマの変更を安全に管理する
 - [ ] マイグレーションの実行とロールバックを体験する
 
 ## 📋 前提条件
 
-- SQLAlchemyの基本的な知識
+- SQLAlchemy の基本的な知識
 - データベースの基本概念
-- Python開発環境の設定完了
+- Python 開発環境の設定完了
 
 ## 🚀 実習の流れ
 
 ### Step 1: 現在の状態を確認
 
-まず、現在のAlembicの状態を確認しましょう。
+まず、現在の Alembic の状態を確認しましょう。
 
 ```bash
 # 現在のリビジョンを確認
@@ -36,35 +36,35 @@ alembic history
 python exercises/alembic_migration_practice.py
 ```
 
-### Step 3: 実習1 - 新しいテーブルの追加
+### Step 3: 実習 1 - 新しいテーブルの追加
 
-#### 3.1 Commentモデルの追加
+#### 3.1 Comment モデルの追加
 
-`models.py`にCommentモデルを追加します：
+`models.py`に Comment モデルを追加します：
 
 ```python
 class Comment(Base):
     """コメントモデル"""
     __tablename__ = "comments"
-    
+
     id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
     content: Mapped[str] = mapped_column(Text, nullable=False)
     author_name: Mapped[str] = mapped_column(String(100), nullable=False)
     author_email: Mapped[str] = mapped_column(String(100), nullable=False)
     is_approved: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, nullable=False)
-    
+
     # 外部キー
     post_id: Mapped[int] = mapped_column(ForeignKey("posts.id"), nullable=False)
-    
+
     # リレーション
     post = relationship("Post", back_populates="comments")
-    
+
     def __repr__(self) -> str:
         return f"<Comment(id={self.id}, author='{self.author_name}')>"
 ```
 
-#### 3.2 Postモデルにリレーションを追加
+#### 3.2 Post モデルにリレーションを追加
 
 ```python
 # Postモデルに追加
@@ -83,9 +83,9 @@ alembic revision --autogenerate -m "Add Comment table"
 alembic upgrade head
 ```
 
-### Step 4: 実習2 - 既存テーブルへのカラム追加
+### Step 4: 実習 2 - 既存テーブルへのカラム追加
 
-#### 4.1 Userモデルにカラムを追加
+#### 4.1 User モデルにカラムを追加
 
 ```python
 # Userモデルに以下のカラムを追加
@@ -106,7 +106,7 @@ alembic revision --autogenerate -m "Add user profile fields"
 alembic upgrade head
 ```
 
-### Step 5: 実習3 - インデックスの追加
+### Step 5: 実習 3 - インデックスの追加
 
 #### 5.1 手動でマイグレーションファイルを作成
 
@@ -126,7 +126,7 @@ def upgrade():
         'comments',
         ['post_id', 'created_at']
     )
-    
+
     # 単一カラムインデックスの作成
     op.create_index(
         'idx_comments_approved',
@@ -145,7 +145,7 @@ def downgrade():
 alembic upgrade head
 ```
 
-### Step 6: 実習4 - ロールバックの実践
+### Step 6: 実習 4 - ロールバックの実践
 
 #### 6.1 現在の状態確認
 
@@ -154,7 +154,7 @@ alembic current
 alembic history
 ```
 
-#### 6.2 1つ前のバージョンに戻す
+#### 6.2 1 つ前のバージョンに戻す
 
 ```bash
 alembic downgrade -1
@@ -176,44 +176,47 @@ alembic upgrade <revision_id>
 alembic downgrade base
 ```
 
-## 🔧 よく使うAlembicコマンド
+## 🔧 よく使う Alembic コマンド
 
-| コマンド | 説明 |
-|---------|------|
-| `alembic current` | 現在のリビジョンを表示 |
-| `alembic history` | マイグレーション履歴を表示 |
-| `alembic revision -m "message"` | 空のマイグレーションファイルを作成 |
+| コマンド                                       | 説明                                   |
+| ---------------------------------------------- | -------------------------------------- |
+| `alembic current`                              | 現在のリビジョンを表示                 |
+| `alembic history`                              | マイグレーション履歴を表示             |
+| `alembic revision -m "message"`                | 空のマイグレーションファイルを作成     |
 | `alembic revision --autogenerate -m "message"` | 自動生成マイグレーションファイルを作成 |
-| `alembic upgrade head` | 最新バージョンにアップグレード |
-| `alembic upgrade +1` | 1つ先のバージョンにアップグレード |
-| `alembic downgrade -1` | 1つ前のバージョンにダウングレード |
-| `alembic downgrade base` | 初期状態にダウングレード |
+| `alembic upgrade head`                         | 最新バージョンにアップグレード         |
+| `alembic upgrade +1`                           | 1 つ先のバージョンにアップグレード     |
+| `alembic downgrade -1`                         | 1 つ前のバージョンにダウングレード     |
+| `alembic downgrade base`                       | 初期状態にダウングレード               |
 
 ## 🎯 実習課題
 
-### 課題1: TagStatsテーブルの追加
+### 課題 1: TagStats テーブルの追加
 
-`migration_models.py`を参考に、TagStatsモデルを追加してください。
+`migration_models.py`を参考に、TagStats モデルを追加してください。
 
 **要件**:
-- [ ] TagStatsモデルをmodels.pyに追加
+
+- [ ] TagStats モデルを models.py に追加
 - [ ] 適切なリレーションの設定
 - [ ] マイグレーションファイルの生成と実行
 
-### 課題2: UserSessionテーブルの追加
+### 課題 2: UserSession テーブルの追加
 
 ユーザーセッション管理のためのテーブルを追加してください。
 
 **要件**:
-- [ ] UserSessionモデルをmodels.pyに追加
+
+- [ ] UserSession モデルを models.py に追加
 - [ ] 適切なインデックスの設定
 - [ ] マイグレーションファイルの生成と実行
 
-### 課題3: パフォーマンス最適化
+### 課題 3: パフォーマンス最適化
 
 既存のテーブルにパフォーマンス向上のためのインデックスを追加してください。
 
 **要件**:
+
 - [ ] 手動でマイグレーションファイルを作成
 - [ ] 複合インデックスの追加
 - [ ] マイグレーションの実行とテスト
@@ -223,12 +226,15 @@ alembic downgrade base
 ### 本番環境での注意点
 
 1. **バックアップの取得**
+
    - マイグレーション実行前に必ずデータベースをバックアップ
 
 2. **テスト環境での検証**
+
    - 本番環境で実行する前に必ずテスト環境で検証
 
 3. **段階的な実行**
+
    - 大量のデータがある場合は、段階的にマイグレーションを実行
 
 4. **ロールバック計画**
@@ -256,15 +262,15 @@ alembic upgrade head --sql
 
 ## 📚 参考資料
 
-- [Alembic公式ドキュメント](https://alembic.sqlalchemy.org/)
-- [SQLAlchemy公式ドキュメント](https://docs.sqlalchemy.org/)
+- [Alembic 公式ドキュメント](https://alembic.sqlalchemy.org/)
+- [SQLAlchemy 公式ドキュメント](https://docs.sqlalchemy.org/)
 - [データベースマイグレーションのベストプラクティス](https://docs.sqlalchemy.org/en/20/tutorial/metadata.html)
 
 ## ✅ 完了チェックリスト
 
 実習完了後、以下の項目をチェックしてください：
 
-- [ ] Alembicの基本コマンドを理解している
+- [ ] Alembic の基本コマンドを理解している
 - [ ] 新しいテーブルの追加ができる
 - [ ] 既存テーブルへのカラム追加ができる
 - [ ] インデックスの作成ができる

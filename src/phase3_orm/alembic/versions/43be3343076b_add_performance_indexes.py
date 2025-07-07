@@ -26,21 +26,21 @@ def upgrade() -> None:
         'comments',
         ['post_id', 'created_at']
     )
-    
+
     # 単一カラムインデックスの作成
     op.create_index(
         'idx_comments_approved',
         'comments',
         ['is_approved']
     )
-    
+
     # 記事の公開日時インデックス
     op.create_index(
         'idx_posts_published_at',
         'posts',
         ['published_at']
     )
-    
+
     # ユーザーの最終ログイン日時インデックス
     op.create_index(
         'idx_users_last_login',
