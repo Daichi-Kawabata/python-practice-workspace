@@ -166,7 +166,7 @@ class Post(Base):
         return f"<Post(id={self.id}, title='{self.title}', published={self.is_published})>"
     
     def __str__(self) -> str:
-        return f"{self.title} by {self.author.username if self.author else 'Unknown'}"
+        return f"{self.title}"
 
 class Tag(Base):
     """タグモデル
