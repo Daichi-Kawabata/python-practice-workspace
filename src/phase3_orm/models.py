@@ -10,9 +10,9 @@ SQLAlchemy モデル定義
 """
 
 from datetime import datetime
-from typing import List, Optional
-from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Boolean, Index
-from sqlalchemy.orm import relationship, Mapped
+from typing import List, Optional, cast
+from sqlalchemy import Integer, String, Text, DateTime, ForeignKey, Boolean, Index, Column
+from sqlalchemy.orm import relationship, Mapped, mapped_column # type: ignore
 
 # 絶対インポートでBase クラスをインポート
 import sys
@@ -29,25 +29,25 @@ class User(Base):
     __tablename__ = "users"
     
     # 主キー
-    id = Column(Integer, primary_key=True, index=True)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
     
     # ユーザー名（必須、ユニーク）
-    username = Column(String(50), unique=True, index=True, nullable=False)
+    username: Mapped[str] = mapped_column(String(50), unique=True, index=True, nullable=False)
     
     # メールアドレス（必須、ユニーク）
-    email = Column(String(100), unique=True, index=True, nullable=False)
+    email: Mapped[str] = mapped_column(String(100), unique=True, index=True, nullable=False)
     
     # 表示名（オプショナル）
-    display_name = Column(String(100), nullable=True)
+    display_name: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
     
     # アクティブフラグ
-    is_active = Column(Boolean, default=True, nullable=False)
+    is_active: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
     
     # 作成日時（自動設定）
-    created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, nullable=False)
     
     # 更新日時（自動更新）
-    updated_at = Column(
+    updated_at: Mapped[datetime] = mapped_column(
         DateTime, 
         default=datetime.utcnow, 
         onupdate=datetime.utcnow,
@@ -76,16 +76,16 @@ class Category(Base):
     __tablename__ = "categories"
     
     # 主キー
-    id = Column(Integer, primary_key=True, index=True)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
     
     # カテゴリ名（必須、ユニーク）
-    name = Column(String(50), unique=True, index=True, nullable=False)
+    name: Mapped[str] = mapped_column(String(50), unique=True, index=True, nullable=False)
     
     # 説明文（オプショナル）
-    description = Column(Text, nullable=True)
+    description: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
     
     # 作成日時
-    created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, nullable=False)
     
     # リレーション: 1つのカテゴリは複数の記事を持つ
     posts = relationship("Post", back_populates="category")
@@ -106,31 +106,31 @@ class Post(Base):
     __tablename__ = "posts"
     
     # 主キー
-    id = Column(Integer, primary_key=True, index=True)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
     
     # タイトル（必須）
-    title = Column(String(200), index=True, nullable=False)
+    title: Mapped[str] = mapped_column(String(200), index=True, nullable=False)
     
     # スラッグ（URL用、ユニーク）
-    slug = Column(String(200), unique=True, index=True, nullable=False)
+    slug: Mapped[str] = mapped_column(String(200), unique=True, index=True, nullable=False)
     
     # 本文（必須）
-    content = Column(Text, nullable=False)
+    content: Mapped[str] = mapped_column(Text, nullable=False)
     
     # 要約（オプショナル）
-    summary = Column(Text, nullable=True)
+    summary: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
     
     # 公開フラグ
-    is_published = Column(Boolean, default=False, nullable=False)
+    is_published: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
     
     # 公開日時（オプショナル）
-    published_at = Column(DateTime, nullable=True)
+    published_at: Mapped[Optional[datetime]] = mapped_column(DateTime, nullable=True)
     
     # 作成日時
-    created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, nullable=False)
     
     # 更新日時
-    updated_at = Column(
+    updated_at: Mapped[datetime] = mapped_column(
         DateTime, 
         default=datetime.utcnow, 
         onupdate=datetime.utcnow,
@@ -138,10 +138,10 @@ class Post(Base):
     )
     
     # 外部キー: 著者への参照
-    author_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    author_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
     
     # 外部キー: カテゴリへの参照
-    category_id = Column(Integer, ForeignKey("categories.id"), nullable=False)
+    category_id: Mapped[int] = mapped_column(ForeignKey("categories.id"), nullable=False)
     
     # リレーション: 記事の著者
     author = relationship("User", back_populates="posts")
@@ -177,13 +177,13 @@ class Tag(Base):
     __tablename__ = "tags"
     
     # 主キー
-    id = Column(Integer, primary_key=True, index=True)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
     
     # タグ名（必須、ユニーク）
-    name = Column(String(50), unique=True, index=True, nullable=False)
+    name: Mapped[str] = mapped_column(String(50), unique=True, index=True, nullable=False)
     
     # 作成日時
-    created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, nullable=False)
     
     # リレーション: タグが付けられた記事（多対多）
     posts = relationship(
@@ -258,8 +258,13 @@ if __name__ == "__main__":
             print("✅ テストデータ作成完了")
             print(f"ユーザー: {user}")
             print(f"記事: {post}")
-            if post.tags:
-                print(f"タグ: {[str(tag) for tag in post.tags]}")
+            
+            # セッション内でのタグアクセス（型アサーション使用）
+            session.refresh(post)  # リレーションを再読み込み
+            post_tags = cast(List[Tag], post.tags)  # 型アサーション
+            if post_tags:
+                tag_names = [str(tag) for tag in post_tags]
+                print(f"タグ: {tag_names}")
             else:
                 print("タグ: なし")
             
