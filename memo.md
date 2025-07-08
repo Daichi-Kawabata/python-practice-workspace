@@ -155,7 +155,7 @@ pip install -r requirements.txt
 - [x] FastAPI の基本構造（ルーティング、HTTP メソッド）の理解
 - [x] REST API 作成（JSON の授受、バリデーション）
 - [x] FastAPI の async 処理の基本（非同期プログラミング）
-- [ ] ミドルウェア、認証（JWT）、テストの方法（pytest）
+- [x] ミドルウェア、認証（JWT）、テストの方法（pytest）
 
 ### 演習課題
 

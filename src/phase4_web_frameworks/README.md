@@ -67,6 +67,39 @@ Python Web 開発の基礎から実践までを学習します。FastAPI と Fla
   - タイムアウト処理
   - 結果のキャッシュ
 
+#### 4.1.4 FastAPI ミドルウェア基礎
+
+- **ファイル**: `fastapi_basics/middleware_basic.py`
+- **内容**:
+  - CORS ミドルウェア
+  - カスタムミドルウェアの作成
+  - リクエスト時間測定
+  - ログ記録ミドルウェア
+  - セキュリティヘッダー
+  - グローバルエラーハンドリング
+
+#### 4.1.5 FastAPI JWT 認証
+
+- **ファイル**: `fastapi_basics/jwt_auth_basic.py`
+- **内容**:
+  - JWT トークンの生成・検証
+  - ユーザー認証・登録
+  - パスワードハッシュ化
+  - 保護されたエンドポイント
+  - 権限（スコープ）ベースのアクセス制御
+  - OAuth2 認証フロー
+
+#### 4.1.6 FastAPI pytest テスト
+
+- **ファイル**: `fastapi_basics/pytest_testing_basic.py`
+- **内容**:
+  - pytest の基本的な使い方
+  - TestClient を使った API テスト
+  - フィクスチャとパラメータ化テスト
+  - モックを使用した外部依存のテスト
+  - 依存性注入のテスト
+  - バリデーションとエラーハンドリングのテスト
+
 #### 4.2 Flask 基礎
 
 - **ファイル**: `flask_basics/flask_hello_world.py`
