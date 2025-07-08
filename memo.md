@@ -147,16 +147,6 @@ pip install -r requirements.txt
 - [x] ブログモデルの設計・CRUD の CLI アプリ作成 →CLI の作成は時間がかかるため BLOG モデルの操作ができるレベルまで学習済み
 - [x] Ruby の ActiveRecord や Golang の GORM との比較メモを作成
 
-### 学習状況（2025-07-04 時点）
-
-- [x] 相対インポートエラーの解決完了（models.py, crud_operations.py, blog_cli.py）
-- [x] database.py のテスト実行成功（データベース初期化・セッション作成）
-- [x] models.py のテスト実行成功（テーブル作成・テストデータ挿入）
-- [x] 学習用教材の整理完了（演習課題を適切に分離）
-- [x] 演習課題用の骨格ファイル作成完了（exercises/crud_operations.py, exercises/blog_cli.py）
-- [x] 参考実装の保存完了（exercises/\*\_template.py）
-- [x] 演習課題の実装・練習（学習者が実施）
-
 ## フェーズ 4〜5: Web フレームワーク基礎・実践（FastAPI & Flask 中心）
 
 ### 学習項目
@@ -164,7 +154,7 @@ pip install -r requirements.txt
 - [x] 開発環境セットアップ（FastAPI, Flask, uvicorn 等のインストール）
 - [x] FastAPI の基本構造（ルーティング、HTTP メソッド）の理解
 - [x] REST API 作成（JSON の授受、バリデーション）
-- [ ] FastAPI の async 処理の基本（非同期プログラミング）
+- [x] FastAPI の async 処理の基本（非同期プログラミング）
 - [ ] ミドルウェア、認証（JWT）、テストの方法（pytest）
 
 ### 演習課題
@@ -180,6 +170,14 @@ pip install -r requirements.txt
 - [ ] Web アプリケーション設計パターン（MVC、Repository パターン）
 - [ ] 環境変数管理、設定ファイルの利用
 - [ ] コンテナ化（Docker の基本）
+- [ ] デプロイ方法（Heroku または AWS などの PaaS や IaaS の基礎）
+
+### 演習課題（以下のいずれか）
+
+- [ ] 簡易なブログアプリケーション（FastAPI + SQLAlchemy）
+- [ ] ToDo リスト API（認証・コンテナ化込みで）
+- [ ] 社内用の簡易ツール（Web スクレイパーや社内システム連携 API）
+
 - [ ] デプロイ方法（Heroku または AWS などの PaaS や IaaS の基礎）
 
 ### 演習課題（以下のいずれか）

@@ -35,6 +35,38 @@ Python Web 開発の基礎から実践までを学習します。FastAPI と Fla
   - 自動 API 文書生成
   - クエリパラメータ・パスパラメータ
 
+#### 4.1.1 FastAPI 非同期処理基礎
+
+- **ファイル**: `fastapi_basics/async_basic.py`
+- **内容**:
+  - async/await の基本概念
+  - 同期処理と非同期処理の比較
+  - asyncio.gather() による並列処理
+  - タイムアウト処理
+  - 例外処理
+
+#### 4.1.2 FastAPI 実践的非同期処理
+
+- **ファイル**: `fastapi_basics/async_advanced.py`
+- **内容**:
+  - HTTP リクエストの非同期処理
+  - ファイル操作の非同期処理
+  - バックグラウンドタスク
+  - 複合的な非同期処理
+  - パフォーマンス最適化
+
+#### 4.1.3 FastAPI 非同期処理演習
+
+- **ファイル**: `exercises/async_exercises.py`
+- **解答例**: `exercises/async_exercises_solutions.py`
+- **内容**:
+  - 基本的な非同期関数の実装
+  - 複数の非同期処理の並列実行
+  - 優先度付きタスクの処理
+  - エラーハンドリング
+  - タイムアウト処理
+  - 結果のキャッシュ
+
 #### 4.2 Flask 基礎
 
 - **ファイル**: `flask_basics/flask_hello_world.py`
