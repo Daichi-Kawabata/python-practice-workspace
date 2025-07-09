@@ -1,4 +1,7 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from routers import auth
+from database import init_db
 
 # --- FastAPIアプリケーションの作成 ---
 app = FastAPI(
@@ -6,6 +9,21 @@ app = FastAPI(
     description="TODOアプリケーションのAPI",
     version="1.0.0"
 )
+
+# --- データベース初期化 ---
+init_db()
+
+# --- CORSミドルウェアの設定 ---
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # 本番環境では具体的なドメインを指定
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# --- ルーターの登録 ---
+app.include_router(auth.router)
 
 @app.get("/")
 async def root():
