@@ -12,7 +12,7 @@ Base = declarative_base()
 
 class DatabaseManager:
     """データベース接続とセッション管理を行うクラス"""
-    def __init__(self, database_url: str = "sqlite:///./todo.db") -> None:
+    def __init__(self, database_url: str = "sqlite:///./todo_api.db") -> None:
         """
         データベースマネージャーを初期化
         
