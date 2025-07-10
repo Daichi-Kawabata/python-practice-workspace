@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from flask import g
 from sqlalchemy.orm import Session
+from typing import List
 
 from ..database import get_db_session
 from ..models.task import Task
@@ -15,6 +16,16 @@ from ..crud.task import (
 )
 
 router = APIRouter(prefix="/tasks", tags=["tasks"])
+
+
+@router.get("/", response_model=List[TaskResponse])
+def get_all_tasks(
+    current_user: User = Depends(get_current_active_user),
+    db: Session = Depends(get_db_session)
+) -> List[Task]:
+    """現在のユーザーの全タスクを取得する"""
+    tasks = db.query(Task).filter(Task.user_id == current_user.id).all()
+    return tasks
 
 
 @router.post("/", response_model=TaskResponse)
