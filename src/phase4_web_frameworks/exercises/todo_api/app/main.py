@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers import auth
-from database import init_db
+from .routers import auth
+from .database import init_db
 
 # --- FastAPIアプリケーションの作成 ---
 app = FastAPI(
@@ -25,10 +25,12 @@ app.add_middleware(
 # --- ルーターの登録 ---
 app.include_router(auth.router)
 
+
 @app.get("/")
 async def root():
     """ルートエンドポイント"""
     return {"message": "Welcome to the Todo API!"}
+
 
 @app.get("/health")
 async def health():
