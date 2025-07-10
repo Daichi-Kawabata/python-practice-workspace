@@ -28,6 +28,22 @@ def get_all_tasks(
     return tasks
 
 
+@router.get("/{task_id}", response_model=TaskResponse)
+def get_task(
+    task_id: int,
+    current_user: User = Depends(get_current_active_user),
+    db: Session = Depends(get_db_session)
+) -> Task:
+    """IDでタスクを取得する"""
+    task = get_task_by_id(db=db, task_id=task_id, user_id=current_user.id)
+    if not task:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Task not found"
+        )
+    return task
+
+
 @router.post("/", response_model=TaskResponse)
 def crate_new_task(
     task: TaskCreate,
