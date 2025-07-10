@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .routers import auth
+
+from .routers import auth, tasks
 from .database import init_db
 
 # --- FastAPIアプリケーションの作成 ---
@@ -24,6 +25,7 @@ app.add_middleware(
 
 # --- ルーターの登録 ---
 app.include_router(auth.router)
+app.include_router(tasks.router)
 
 
 @app.get("/")
