@@ -54,6 +54,13 @@ htmlcov/
 .dmypy.json
 dmypy.json
 
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+todo_api.db
+blog.db
+
 # データ分析・学習過程で生成されるファイル
 # CSV データファイル
 *.csv

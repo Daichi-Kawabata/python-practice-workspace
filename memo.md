@@ -159,9 +159,9 @@ pip install -r requirements.txt
 
 ### 演習課題
 
-- [ ] 簡単な REST API の構築（認証付き）
-- [ ] Swagger を活用した API ドキュメント生成（FastAPI）
-- [ ] ORM との連携（SQLAlchemy & FastAPI の連携アプリケーション）
+- [x] 簡単な REST API の構築（認証付き）
+- [x] Swagger を活用した API ドキュメント生成（FastAPI）
+- [x] ORM との連携（SQLAlchemy & FastAPI の連携アプリケーション）
 
 ## フェーズ 6: 応用プロジェクト・デプロイ実践（統合演習）
 
