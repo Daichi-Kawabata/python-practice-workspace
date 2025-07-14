@@ -167,8 +167,8 @@ pip install -r requirements.txt
 
 ### 学習項目
 
-- [ ] Web アプリケーション設計パターン（MVC、Repository パターン）
-- [ ] 環境変数管理、設定ファイルの利用
+- [x] Web アプリケーション設計パターン（MVC、Repository パターン）
+- [x] 環境変数管理、設定ファイルの利用
 - [ ] コンテナ化（Docker の基本）
 - [ ] デプロイ方法（Heroku または AWS などの PaaS や IaaS の基礎）
 
