@@ -1,0 +1,125 @@
+version: "3.8"
+
+services:
+  # 開発環境用のアプリケーション
+  app-dev:
+    build: .
+    environment:
+      - APP_NAME=Docker Compose Development App
+      - ENVIRONMENT=development
+      - DEBUG=true
+      - LOG_LEVEL=DEBUG
+      - DB_HOST=postgres-dev
+      - DB_NAME=myapp_dev
+      - DB_USER=dev_user
+      - DB_PASSWORD=dev_password
+      - REDIS_URL=redis://redis-dev:6379/0
+      - ENABLE_CACHE=true
+      - ENABLE_METRICS=true
+      - 'FEATURE_FLAGS={"new_ui": true, "beta_features": true}'
+    depends_on:
+      - postgres-dev
+      - redis-dev
+    networks:
+      - app-network
+
+  # 本番環境用のアプリケーション
+  app-prod:
+    build: .
+    environment:
+      - APP_NAME=Docker Compose Production App
+      - ENVIRONMENT=production
+      - DEBUG=false
+      - LOG_LEVEL=INFO
+      - DB_HOST=postgres-prod
+      - DB_NAME=myapp_prod
+      - DB_USER=prod_user
+      - DB_PASSWORD=secure_prod_password
+      - REDIS_URL=redis://redis-prod:6379/0
+      - ENABLE_CACHE=true
+      - ENABLE_METRICS=true
+      - MAX_CONNECTIONS=20
+      - 'FEATURE_FLAGS={"new_ui": true, "beta_features": false}'
+    depends_on:
+      - postgres-prod
+      - redis-prod
+    networks:
+      - app-network
+
+  # 開発用PostgreSQL
+  postgres-dev:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: myapp_dev
+      POSTGRES_USER: dev_user
+      POSTGRES_PASSWORD: dev_password
+    volumes:
+      - postgres_dev_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  # 本番用PostgreSQL
+  postgres-prod:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: myapp_prod
+      POSTGRES_USER: prod_user
+      POSTGRES_PASSWORD: secure_prod_password
+    volumes:
+      - postgres_prod_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  # 開発用Redis
+  redis-dev:
+    image: redis:7-alpine
+    networks:
+      - app-network
+
+  # 本番用Redis
+  redis-prod:
+    image: redis:7-alpine
+    command: redis-server --requirepass secure_redis_password
+    networks:
+      - app-network
+
+  # .envファイル自動読み込みテスト
+  app-auto-env:
+    build: .
+    environment:
+      # .envファイルから自動読み込み（変数展開）
+      - APP_NAME=${APP_NAME}
+      - ENVIRONMENT=${ENVIRONMENT}
+      - DEBUG=${DEBUG}
+      - LOG_LEVEL=${LOG_LEVEL}
+      - DB_HOST=${DB_HOST}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - ENABLE_CACHE=${ENABLE_CACHE}
+      - ENABLE_METRICS=${ENABLE_METRICS}
+      - MAX_CONNECTIONS=${MAX_CONNECTIONS}
+    depends_on:
+      - postgres-dev
+    networks:
+      - app-network
+
+  # env_file明示的指定テスト
+  app-env-file:
+    build: .
+    env_file:
+      - .env.development # 明示的にファイル指定
+    environment:
+      - APP_NAME=Explicit Env File App # env_fileより優先される
+    depends_on:
+      - postgres-dev
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  postgres_dev_data:
+  postgres_prod_data:

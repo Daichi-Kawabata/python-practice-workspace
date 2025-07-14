@@ -1,0 +1,22 @@
+# マルチステージビルド用の本番環境向け依存関係
+
+# FastAPI本体（軽量版）
+fastapi==0.104.1
+
+# ASGI サーバー（本番環境用）
+uvicorn[standard]==0.24.0
+
+# データバリデーション
+pydantic==2.5.0
+
+# HTTP通信（ヘルスチェック用）
+requests==2.31.0
+
+# 型ヒント支援
+typing-extensions==4.8.0
+
+# 本番環境用の追加パッケージ
+gunicorn==21.2.0
+
+# セキュリティ強化
+cryptography==41.0.7
