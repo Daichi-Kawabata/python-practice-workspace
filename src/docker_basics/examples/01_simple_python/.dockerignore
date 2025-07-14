@@ -1,0 +1,38 @@
+# .dockerignore - Docker イメージに含めないファイル/ディレクトリを指定
+
+# Git 関連
+
+.git
+.gitignore
+
+# Python 関連
+
+**pycache**
+_.pyc
+_.pyo
+_.pyd
+.Python
+_.egg-info/
+.pytest_cache
+.coverage
+.venv
+env/
+venv/
+
+# IDE 関連
+
+.vscode/
+.idea/
+_.swp
+_.swo
+
+# OS 関連
+
+.DS_Store
+Thumbs.db
+
+# その他
+
+_.log
+_.tmp
+README.md
