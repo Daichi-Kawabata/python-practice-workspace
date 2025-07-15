@@ -1,2 +1,2 @@
 web: gunicorn app.main:app --workers 4 --worker-class uvicorn.workers.UvicornWorker
-release: alembic upgrade head
+release: alembic -c app/alembic.ini upgrade head
