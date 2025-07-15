@@ -3,9 +3,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 
 from .routers import auth, tasks
-from .database import init_db
+from app.database import init_db
 
 # 初回起動時にデータベースを初期化するためのlifespanイベント
+
+
 @asynccontextmanager
 async def lifespan(app):
     init_db()

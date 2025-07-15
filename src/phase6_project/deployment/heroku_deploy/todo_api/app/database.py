@@ -23,8 +23,8 @@ class DatabaseManager:
             database_url: データベース接続URL（デフォルト: SQLite）
         """
         # HerokuのDATABASE_URLを優先し、なければローカルSQLite
-        url = database_url or os.environ.get(
-            "DATABASE_URL", "sqlite:///./todo_api.db")
+        url = os.environ.get(
+            "DATABASE_URL") or database_url or "sqlite:///./todo_api.db"
         # PostgreSQLのURL修正
         if url.startswith("postgres://"):
             url = url.replace("postgres://", "postgresql://", 1)
@@ -74,8 +74,7 @@ db_manager = DatabaseManager()
 def init_db() -> None:
     """データベースの初期化"""
     db_manager.create_engine_and_session()
-    db_manager.create_tables()
-    print("データベースが初期化されました。")
+    print("データベースエンジンとセッションが初期化されました。")
 
 
 def get_db_session() -> Session:

@@ -1,14 +1,13 @@
 from fastapi import APIRouter, Depends, HTTPException, status
-from flask import g
 from sqlalchemy.orm import Session
 from typing import List
 
 from ..database import get_db_session
 from ..models.task import Task
-from ..core.dependencies import get_current_active_user
+from app.core.dependencies import get_current_active_user
 from ..schemas.task import TaskCreate, TaskResponse, TaskUpdate
 from ..models.user import User
-from ..crud.task import (
+from app.crud.task import (
     get_task_by_id,
     create_task,
     update_task,

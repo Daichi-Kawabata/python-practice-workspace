@@ -2,7 +2,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import or_
 from ..models.user import User
 from ..schemas.user import UserCreate, UserUpdate
-from ..core.security import get_password_hash, verify_password
+from app.core.security import get_password_hash, verify_password
 from typing import Optional
 
 

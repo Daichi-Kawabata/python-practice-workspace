@@ -7,9 +7,9 @@ from ..database import get_db_session
 from ..schemas.user import UserCreate, UserResponse
 from ..schemas.token import Token
 from ..crud.user import create_user, authenticate_user
-from ..core.security import create_access_token
-from ..core.config import settings
-from ..core.dependencies import get_current_active_user
+from app.core.security import create_access_token
+from app.core.config import settings
+from app.core.dependencies import get_current_active_user
 from ..models.user import User
 
 router = APIRouter(prefix="/auth", tags=["authentication"])
