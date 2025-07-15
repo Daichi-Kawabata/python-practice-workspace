@@ -10,6 +10,7 @@ from .database import init_db
 async def lifespan(app):
     init_db()
     yield
+    # ここでアプリケーションの終了時処理を追加することも可能
 
 # --- FastAPIアプリケーションの作成 ---
 app = FastAPI(
