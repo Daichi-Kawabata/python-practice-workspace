@@ -1,18 +1,23 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from contextlib import asynccontextmanager
 
 from .routers import auth, tasks
 from .database import init_db
+
+# 初回起動時にデータベースを初期化するためのlifespanイベント
+@asynccontextmanager
+async def lifespan(app):
+    init_db()
+    yield
 
 # --- FastAPIアプリケーションの作成 ---
 app = FastAPI(
     title="Todo API",
     description="TODOアプリケーションのAPI",
-    version="1.0.0"
+    version="1.0.0",
+    lifespan=lifespan
 )
-
-# --- データベース初期化 ---
-init_db()
 
 # --- CORSミドルウェアの設定 ---
 app.add_middleware(
@@ -47,7 +52,7 @@ if __name__ == "__main__":
     print("📚 ReDoc: http://localhost:8000/redoc")
 
     uvicorn.run(
-        "main:app",
+        "app.main:app",
         host="0.0.0.0",
         port=8000,
         reload=True,
